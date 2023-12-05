@@ -1,0 +1,32 @@
+name: Expresiones 
+run-name: Expresiones
+on:
+    workflow_dispatch:
+        inputs:
+            name:
+                description: 'Nombre del workflow'
+                required: true
+                default: 'Expresiones'
+            message:
+                description: 'Mensaje del workflow'
+                required: true
+                default: 'Hola mundo'
+            edad:
+                description: 'Edad del workflow'
+                required: true
+                default: '20'
+            
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Saludo
+              run: echo ${{ github.event.inputs.message }}
+            - name: Es mayor de edad
+              if : ${{ github.event.inputs.edad >= 18 }}
+              run: echo ' ${{github.event.inputs.name}} Es mayor de edad'
+            - name: Es menor de  edad
+              if : ${{ github.event.inputs.edad < 18 }}
+              run: echo 'echo ${{github.event.inputs.name}} Es menor de edad'
+
+
